@@ -23,7 +23,8 @@
     "react",
     "@typescript-eslint",
     "react-native",
-    "prettier"
+    "prettier",
+    "react-hooks"
   ],
   "rules": {
     "react-native/no-unused-styles": 2,
@@ -39,6 +40,9 @@
         "tabWidth": 2,
         "singleQuote": true
       }
-    ]
+    ],
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "error"
   }
 }
