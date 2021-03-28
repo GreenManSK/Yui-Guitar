@@ -61,7 +61,7 @@ export const RecordList = () => {
   const max = Math.max(...records, 0);
 
   return (
-    <View>
+    <View style={Styles.container}>
       <View style={[Styles.inputLine, styles.form]}>
         <TextInput
           style={[Styles.textInput, styles.input]}

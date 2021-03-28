@@ -8,9 +8,15 @@ export const Styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
   },
+  container: {
+    flex: 1,
+  },
   text: {
     color: Colors.text,
     fontSize: DefaultFontSize,
+  },
+  textCenter: {
+    alignSelf: 'center',
   },
   bold: {
     fontWeight: 'bold',
@@ -33,9 +39,19 @@ export const Styles = StyleSheet.create({
     backgroundColor: Colors.main,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingVertical: RFValue(10),
   },
   buttonText: {
     color: Colors.text,
     fontSize: DefaultFontSize,
+  },
+  slider: {
+    marginHorizontal: RFValue(20),
+    marginBottom: RFValue(20),
+  },
+  separator: {
+    marginTop: RFValue(20),
+    borderBottomWidth: RFValue(3),
+    borderColor: Colors.placeholderText,
   },
 });
