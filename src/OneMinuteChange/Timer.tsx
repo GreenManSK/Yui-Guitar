@@ -11,6 +11,7 @@ import { Styles } from '../Styles/Styles';
 import { RFValue } from 'react-native-responsive-fontsize';
 import Slider from '@react-native-community/slider';
 import { useSoundContext } from '../Contexts/SoundContext';
+import { Orientation, useScreenContext } from '../Contexts/ScreenContext';
 
 const styles = StyleSheet.create({
   image: {
@@ -50,11 +51,12 @@ const getCountdownColor = (value: number, sessionLength: number) => {
   return [];
 };
 
-const sessionLength = 4;
+const sessionLength = 60;
 const defaultWait = 3;
 const waitBounds = { min: 1, max: 10 };
 
 export const Timer = () => {
+  const { orientation } = useScreenContext();
   const { playClick, playFinish } = useSoundContext();
   const [countdown, setCountdown] = React.useState(0);
   const [waitInSec, setWaitInSec] = React.useState(defaultWait);
@@ -95,7 +97,7 @@ export const Timer = () => {
   );
 
   return (
-    <>
+    <View style={orientation == Orientation.portrait ? [] : [Styles.container]}>
       {timer && (
         <View style={Styles.container}>
           <ImageBackground style={styles.image} source={TanTanImage}>
@@ -113,31 +115,33 @@ export const Timer = () => {
           </ImageBackground>
         </View>
       )}
-      {!timer && (
-        <View style={styles.form}>
-          <Text style={[Styles.text, Styles.textCenter]}>
-            {waitInSec} delay
-          </Text>
-          <Slider
-            style={Styles.slider}
-            minimumValue={waitBounds.min}
-            maximumValue={waitBounds.max}
-            minimumTrackTintColor={Colors.mainActive}
-            maximumTrackTintColor={Colors.text}
-            thumbTintColor={Colors.main}
-            step={1}
-            value={waitInSec}
-            onValueChange={setWaitInSec}
-          />
-          <TouchableHighlight
-            underlayColor={Colors.mainActive}
-            style={Styles.button}
-            onPress={toggleTimer}
-          >
-            <Text style={Styles.buttonText}>{timer ? 'Stop' : 'Start'}</Text>
-          </TouchableHighlight>
-        </View>
-      )}
-    </>
+      <View style={styles.form}>
+        {!timer && (
+          <>
+            <Text style={[Styles.text, Styles.textCenter]}>
+              {waitInSec} delay
+            </Text>
+            <Slider
+              style={Styles.slider}
+              minimumValue={waitBounds.min}
+              maximumValue={waitBounds.max}
+              minimumTrackTintColor={Colors.mainActive}
+              maximumTrackTintColor={Colors.text}
+              thumbTintColor={Colors.main}
+              step={1}
+              value={waitInSec}
+              onValueChange={setWaitInSec}
+            />
+          </>
+        )}
+        <TouchableHighlight
+          underlayColor={Colors.mainActive}
+          style={Styles.button}
+          onPress={toggleTimer}
+        >
+          <Text style={Styles.buttonText}>{timer ? 'Stop' : 'Start'}</Text>
+        </TouchableHighlight>
+      </View>
+    </View>
   );
 };

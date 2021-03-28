@@ -3,7 +3,7 @@
     "name": "Yui Guitar",
     "slug": "yui",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/tan_tan.gif",

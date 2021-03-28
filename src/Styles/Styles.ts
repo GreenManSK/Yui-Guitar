@@ -11,6 +11,10 @@ export const Styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  landscapeContainer: {
+    flex: 1,
+    flexDirection: 'row',
+  },
   text: {
     color: Colors.text,
     fontSize: DefaultFontSize,
@@ -52,6 +56,10 @@ export const Styles = StyleSheet.create({
   separator: {
     marginTop: RFValue(20),
     borderBottomWidth: RFValue(3),
+    borderColor: Colors.placeholderText,
+  },
+  verticalSeparator: {
+    borderRightWidth: RFValue(3),
     borderColor: Colors.placeholderText,
   },
 });
