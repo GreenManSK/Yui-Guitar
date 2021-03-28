@@ -25,7 +25,6 @@ const OneMinuteChangeLandscape = () => (
 
 export const OneMinuteChange = () => {
   const { orientation } = useScreenContext();
-  console.log(orientation);
   return orientation == Orientation.portrait ? (
     <OneMinuteChangePortrait />
   ) : (
