@@ -10,6 +10,7 @@ import { Colors } from '../Styles/Colors';
 import { Styles } from '../Styles/Styles';
 import { RFValue } from 'react-native-responsive-fontsize';
 import Slider from '@react-native-community/slider';
+import { useSoundContext } from '../Contexts/SoundContext';
 
 const styles = StyleSheet.create({
   image: {
@@ -49,11 +50,12 @@ const getCountdownColor = (value: number, sessionLength: number) => {
   return [];
 };
 
-const sessionLength = 60;
+const sessionLength = 4;
 const defaultWait = 3;
 const waitBounds = { min: 1, max: 10 };
 
 export const Timer = () => {
+  const { playClick, playFinish } = useSoundContext();
   const [countdown, setCountdown] = React.useState(0);
   const [waitInSec, setWaitInSec] = React.useState(defaultWait);
   const [timer, setTimer] = React.useState<NodeJS.Timeout>();
@@ -74,11 +76,14 @@ export const Timer = () => {
   React.useEffect(() => () => timer && clearInterval(timer), [timer]);
 
   if (timer) {
-    if (countdown === sessionLength || countdown === sessionLength / 2) {
-      console.log('cink');
+    if (
+      countdown === sessionLength ||
+      countdown === Math.round(sessionLength / 2)
+    ) {
+      playClick();
     }
     if (countdown === 0) {
-      console.log('bang');
+      playFinish();
       clearInterval(timer);
       setTimer(undefined);
     }
