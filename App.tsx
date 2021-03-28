@@ -12,7 +12,8 @@ export default function App() {
 }
 
 const colors = {
-  white: '#fff'
+  white: '#fff',
+  black: '#000',
 };
 
 const styles = StyleSheet.create({
