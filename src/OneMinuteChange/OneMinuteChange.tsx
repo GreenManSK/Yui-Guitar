@@ -1,8 +1,8 @@
 import React from 'react';
 import {
   FlatList,
+  Keyboard,
   ListRenderItemInfo,
-  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -55,12 +55,13 @@ export const OneMinuteChange = () => {
       setRecords([parsedValue, ...records]);
       setInputValue('');
     }
+    Keyboard.dismiss();
   }, [inputValue, records]);
 
   const max = Math.max(...records, 0);
 
   return (
-    <ScrollView keyboardShouldPersistTaps={'never'}>
+    <View>
       <View style={[Styles.inputLine, styles.form]}>
         <TextInput
           style={[Styles.textInput, styles.input]}
@@ -89,6 +90,6 @@ export const OneMinuteChange = () => {
         </Text>
         <FlatList data={transformRecordsToData(records)} renderItem={Record} />
       </View>
-    </ScrollView>
+    </View>
   );
 };
