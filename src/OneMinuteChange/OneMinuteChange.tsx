@@ -7,27 +7,14 @@ import { Separator } from '../Utils/Separator';
 import { Orientation, useScreenContext } from '../Contexts/ScreenContext';
 import { VerticalSeparator } from '../Utils/VerticalSeparator';
 
-const OneMinuteChangePortrait = () => (
-  <View style={Styles.container}>
-    <Timer />
-    <Separator />
-    <RecordList />
-  </View>
-);
-
-const OneMinuteChangeLandscape = () => (
-  <View style={Styles.landscapeContainer}>
-    <Timer />
-    <VerticalSeparator />
-    <RecordList />
-  </View>
-);
-
 export const OneMinuteChange = () => {
   const { orientation } = useScreenContext();
-  return orientation == Orientation.portrait ? (
-    <OneMinuteChangePortrait />
-  ) : (
-    <OneMinuteChangeLandscape />
+  const isPortrait = orientation == Orientation.portrait;
+  return (
+    <View style={isPortrait ? Styles.container : Styles.landscapeContainer}>
+      <Timer />
+      {isPortrait ? <Separator /> : <VerticalSeparator />}
+      <RecordList />
+    </View>
   );
 };

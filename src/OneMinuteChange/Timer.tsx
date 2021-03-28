@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
+    minHeight: '300',
   },
   countdown: {
     backgroundColor: Colors.background,
