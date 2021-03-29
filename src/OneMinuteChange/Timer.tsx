@@ -56,14 +56,6 @@ const sessionLength = 60;
 const defaultWait = 3;
 const waitBounds = { min: 1, max: 10 };
 
-const ONE_SECOND_IN_MS = 1000;
-
-const PATTERN = [
-  1 * ONE_SECOND_IN_MS,
-  2 * ONE_SECOND_IN_MS,
-  3 * ONE_SECOND_IN_MS,
-];
-
 export const Timer = () => {
   const { orientation } = useScreenContext();
   const { playClick, playFinish } = useSoundContext();
