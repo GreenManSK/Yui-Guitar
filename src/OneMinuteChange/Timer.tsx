@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Text,
   TouchableHighlight,
+  Vibration,
   View,
 } from 'react-native';
 import { Colors } from '../Styles/Colors';
@@ -17,7 +18,6 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
-    minHeight: '300',
   },
   countdown: {
     backgroundColor: Colors.background,
@@ -56,6 +56,14 @@ const sessionLength = 60;
 const defaultWait = 3;
 const waitBounds = { min: 1, max: 10 };
 
+const ONE_SECOND_IN_MS = 1000;
+
+const PATTERN = [
+  1 * ONE_SECOND_IN_MS,
+  2 * ONE_SECOND_IN_MS,
+  3 * ONE_SECOND_IN_MS,
+];
+
 export const Timer = () => {
   const { orientation } = useScreenContext();
   const { playClick, playFinish } = useSoundContext();
@@ -83,10 +91,12 @@ export const Timer = () => {
       countdown === sessionLength ||
       countdown === Math.round(sessionLength / 2)
     ) {
+      Vibration.vibrate(1000);
       playClick();
     }
     if (countdown === 0) {
       playFinish();
+      Vibration.vibrate(3000);
       clearInterval(timer);
       setTimer(undefined);
     }
@@ -98,7 +108,11 @@ export const Timer = () => {
   );
 
   return (
-    <View style={orientation == Orientation.portrait ? [] : [Styles.container]}>
+    <View
+      style={
+        orientation == Orientation.portrait && !timer ? [] : [Styles.container]
+      }
+    >
       {timer && (
         <View style={Styles.container}>
           <ImageBackground style={styles.image} source={TanTanImage}>

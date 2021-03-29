@@ -7,6 +7,7 @@ export const DefaultFontSize = RFValue(20);
 export const Styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
+    backgroundColor: Colors.background,
   },
   container: {
     flex: 1,
