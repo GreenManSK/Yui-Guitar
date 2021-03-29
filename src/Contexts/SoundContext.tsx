@@ -13,7 +13,8 @@ const SoundContext = React.createContext<ISoundContext>({
 });
 
 const playSound = async (sound: Sound | undefined) => {
-  await sound?.playFromPositionAsync(0);
+  await sound?.setPositionAsync(0);
+  await sound?.playAsync();
 };
 
 export const SoundContextProvider: React.FunctionComponent = ({ children }) => {

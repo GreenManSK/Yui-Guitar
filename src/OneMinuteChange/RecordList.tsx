@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { DefaultFontSize, Styles } from '../Styles/Styles';
 import { Colors } from '../Styles/Colors';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const styles = StyleSheet.create({
   form: {
@@ -31,13 +32,13 @@ const styles = StyleSheet.create({
 });
 
 type RecordData = {
-  id: number;
+  id: string;
   value: number;
 };
 
 export const transformRecordsToData = (records: number[]): RecordData[] =>
   records.map((value, id) => ({
-    id,
+    id: `${id}`,
     value,
   }));
 
@@ -45,18 +46,33 @@ const Record = (item: ListRenderItemInfo<RecordData>) => (
   <Text style={Styles.text}>{item.item.value}</Text>
 );
 
+const recordsKey = 'records';
+
 export const RecordList = () => {
   const [records, setRecords] = React.useState<number[]>([]);
   const [inputValue, setInputValue] = React.useState('');
 
+  React.useEffect(() => {
+    AsyncStorage.getItem(recordsKey).then((records) => {
+      records && setRecords(JSON.parse(records));
+    });
+  }, [setRecords]);
+
   const addRecord = React.useCallback(() => {
     const parsedValue = parseInt(inputValue);
     if (!isNaN(parsedValue) && parsedValue > 0) {
-      setRecords([parsedValue, ...records]);
+      const newRecords = [parsedValue, ...records];
+      setRecords(newRecords);
       setInputValue('');
+      AsyncStorage.setItem(recordsKey, JSON.stringify(newRecords));
     }
     Keyboard.dismiss();
   }, [inputValue, records]);
+
+  const clearRecords = React.useCallback(() => {
+    setRecords([]);
+    AsyncStorage.setItem(recordsKey, JSON.stringify([]));
+  }, []);
 
   const max = Math.max(...records, 0);
 
@@ -79,6 +95,7 @@ export const RecordList = () => {
           underlayColor={Colors.mainActive}
           style={[Styles.button, styles.button]}
           onPress={addRecord}
+          onLongPress={clearRecords}
         >
           <Text style={Styles.buttonText}>Add</Text>
         </TouchableHighlight>
