@@ -1,11 +1,11 @@
 import React from 'react';
-import { RecordList } from './RecordList';
 import { Timer } from './Timer';
 import { View } from 'react-native';
 import { Styles } from '../Styles/Styles';
 import { Separator } from '../Utils/Separator';
 import { Orientation, useScreenContext } from '../Contexts/ScreenContext';
 import { VerticalSeparator } from '../Utils/VerticalSeparator';
+import { Records } from './Records/Records';
 
 export const OneMinuteChange = () => {
   const { orientation } = useScreenContext();
@@ -14,7 +14,7 @@ export const OneMinuteChange = () => {
     <View style={isPortrait ? Styles.container : Styles.landscapeContainer}>
       <Timer />
       {isPortrait ? <Separator /> : <VerticalSeparator />}
-      <RecordList />
+      <Records />
     </View>
   );
 };
