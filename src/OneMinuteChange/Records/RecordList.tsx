@@ -14,7 +14,6 @@ export interface IRecordListProps {
 
 const styles = StyleSheet.create({
   maximumText: {
-    marginTop: DefaultFontSize,
     alignItems: 'center',
   },
 });

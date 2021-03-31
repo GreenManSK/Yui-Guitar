@@ -29,7 +29,7 @@ export const Styles = StyleSheet.create({
   inputLine: {
     backgroundColor: Colors.inputBackground,
     height: RFValue(40),
-    marginTop: RFValue(20),
+    marginBottom: RFValue(20),
     borderTopWidth: 1,
     borderBottomWidth: 1,
     borderColor: Colors.main,
@@ -55,12 +55,25 @@ export const Styles = StyleSheet.create({
     marginBottom: RFValue(20),
   },
   separator: {
-    marginTop: RFValue(20),
+    marginVertical: RFValue(20),
     borderBottomWidth: RFValue(3),
     borderColor: Colors.placeholderText,
   },
   verticalSeparator: {
     borderRightWidth: RFValue(3),
     borderColor: Colors.placeholderText,
+  },
+  selectButton: {
+    backgroundColor: Colors.placeholderText,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: RFValue(10),
+    marginLeft: RFValue(5),
+    paddingHorizontal: RFValue(5),
+    height: '100%',
+    minWidth: 2 * DefaultFontSize,
+  },
+  selectButtonActive: {
+    backgroundColor: Colors.main,
   },
 });
