@@ -14,23 +14,27 @@ export interface IChordSelectorProps {
   chord: string;
   chordList: string[];
   setChord: (value: string) => void;
+  openChordEdit: () => void;
 }
 
 type ChordData = {
   id: string;
   selected: boolean;
   setChord: (value: string) => void;
+  openChordEdit: () => void;
 };
 
 const transformFromChordsToData = (
   selectedChord: string,
   chordList: string[],
-  setChord: (value: string) => void
+  setChord: (value: string) => void,
+  openChordEdit: () => void
 ): ChordData[] =>
   chordList.map((chord) => ({
     id: chord,
     selected: chord == selectedChord,
     setChord,
+    openChordEdit,
   }));
 
 const Chord = ({ item: chord }: ListRenderItemInfo<ChordData>) => (
@@ -41,6 +45,7 @@ const Chord = ({ item: chord }: ListRenderItemInfo<ChordData>) => (
       ...(chord.selected ? [Styles.selectButtonActive] : []),
     ]}
     onPress={() => chord.setChord(chord.id)}
+    onLongPress={chord.openChordEdit}
   >
     <Text style={Styles.text}>{chord.id}</Text>
   </TouchableHighlight>
@@ -50,12 +55,18 @@ export const ChordSelector = ({
   chord,
   chordList,
   setChord,
+  openChordEdit,
 }: IChordSelectorProps) => {
   return (
     <View>
       <FlatList
         style={Styles.inputLine}
-        data={transformFromChordsToData(chord, chordList, setChord)}
+        data={transformFromChordsToData(
+          chord,
+          chordList,
+          setChord,
+          openChordEdit
+        )}
         renderItem={Chord}
         horizontal={true}
         fadingEdgeLength={RFValue(50)}
